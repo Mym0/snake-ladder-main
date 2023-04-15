@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import ImageContainer from "../Image/ImageContainer.component";
-import snake3 from "../../img/snake3.png";
-import snake2 from "../../img/snake2.png";
-import snake4 from "../../img/snake4.png";
-import snake5 from "../../img/snake5.png";
-import ladder1 from "../../img/ladder.png";
-import P1 from "../../img/P1.png";
-import "./Cell.scss";
+import React, { useEffect } from 'react';
+import ImageContainer from '../Image/ImageContainer.component';
+import snake3 from '../../img/snake3.png';
+import snake2 from '../../img/snake2.png';
+import snake4 from '../../img/snake4.png';
+import snake5 from '../../img/snake5.png';
+import ladder1 from '../../img/ladder.png';
+import P1 from '../../img/P1.png';
+import './Cell.scss';
 export default function Cell(props) {
-
   let classes = {};
   let sSrc = undefined;
   let imageContainer = [];
@@ -23,34 +22,33 @@ export default function Cell(props) {
     classes.divClass = props.ladder.divClass;
     imageVisible = true;
   } else {
-    classes.imgClass = "";
-    classes.divClass = "";
+    classes.imgClass = '';
+    classes.divClass = '';
   }
 
-
   switch (classes.imgClass) {
-    case "snake3":
+    case 'snake3':
       sSrc = snake3;
       break;
-    case "snake2":
+    case 'snake2':
       sSrc = snake2;
       break;
-    case "snake4":
+    case 'snake4':
       sSrc = snake4;
       break;
-    case "ladder1":
+    case 'ladder1':
       sSrc = ladder1;
       break;
-    case "ladder2":
+    case 'ladder2':
       sSrc = ladder1;
       break;
-    case "ladder3":
+    case 'ladder3':
       sSrc = ladder1;
       break;
-    case "snake5":
+    case 'snake5':
       sSrc = snake5;
       break;
-    case "P1":
+    case 'P1':
       sSrc = P1;
       break;
     default:
@@ -86,7 +84,6 @@ export default function Cell(props) {
       {props.number}
 
       {imageContainer}
-  
     </div>
   );
 }
