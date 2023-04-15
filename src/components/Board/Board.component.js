@@ -18,7 +18,7 @@ const Board = () => {
     gameover: false,
     start: false,
   });
-  
+
   const [boardHtml, setBoardHtml] = useState([]);
   const [question, setQuestion] = useState("");
   const [choices, setChoices] = useState([]);
@@ -75,35 +75,35 @@ const Board = () => {
     [gameData.ladders]
   );
 
-    // Creating Elements on the Board
-    const createBoard = (init, cells) => {
-        const boardHtml = [];
-        
-        for (let i = init; i <= cells; i++) {
-          let playerFound = gameData.player.status === i ? gameData.player : undefined;
-          let snakeFound = checkSnake(i);
-          let ladderFound = checkLadder(i);
-          const found = {
-            backgroundColor: "grey",
-          };
-  
-          // Todo - Put images
-          boardHtml.push(
-            <Cell
-              sStyle={found}
-              snake={snakeFound}
-              ladder={ladderFound}
-              player={playerFound}
-              number={i}
-            ></Cell>
-          );
-        }
-        return boardHtml;
+  // Creating Elements on the Board
+  const createBoard = (init, cells) => {
+    const boardHtml = [];
+
+    for (let i = init; i <= cells; i++) {
+      let playerFound =
+        gameData.player.status === i ? gameData.player : undefined;
+      let snakeFound = checkSnake(i);
+      let ladderFound = checkLadder(i);
+      const found = {
+        backgroundColor: "grey",
+      };
+
+      // Todo - Put images
+      boardHtml.push(
+        <Cell
+          sStyle={found}
+          snake={snakeFound}
+          ladder={ladderFound}
+          player={playerFound}
+          number={i}
+        ></Cell>
+      );
     }
+    return boardHtml;
+  };
 
   //Creating rows and columns
   useEffect(() => {
-
     const fixedCol = 10;
     const boardHtmlData = [];
     for (let i = 0; i < 10; i++) {
@@ -113,7 +113,6 @@ const Board = () => {
     setBoardHtml(boardHtmlData);
   }, [gameData, resetBtn]);
 
-  
   const handleSnakeOrLadderTile = () => {
     // Generate a random question and choices
     const question = "What is the capital of France?";
@@ -138,10 +137,9 @@ const Board = () => {
     });
     const min = 1;
     const max = 7;
-    const rand = Math.floor(min + Math.random() * (max - min));
-    //  const rand = 41;
-    let thePlayer = {...gameData.player};
-
+    // const rand = Math.floor(min + Math.random() * (max - min));
+    const rand = 5;
+    let thePlayer = { ...gameData.player };
 
     if (thePlayer.status > 94) {
       const sum = thePlayer.status + rand;
@@ -175,14 +173,14 @@ const Board = () => {
 
     //change the layout of the player if they are overlapping
     // if (gameData.player[0].status === gameData.player[1].status) {
-      // pivot the 1st player to the left and the 2nd one to the right sing left prob in CSS
-      // const playerOne = document.querySelector(".imageContainerP1");
-      // console.log(
-      //   playerOne.style.backgroundColor,''
-      // );
-      // playerOne.style.padding = "50px";
-      // const playerTwo = document.querySelector(".imageContainerP2");
-      // playerTwo.style.marginLeft = "10px";
+    // pivot the 1st player to the left and the 2nd one to the right sing left prob in CSS
+    // const playerOne = document.querySelector(".imageContainerP1");
+    // console.log(
+    //   playerOne.style.backgroundColor,''
+    // );
+    // playerOne.style.padding = "50px";
+    // const playerTwo = document.querySelector(".imageContainerP2");
+    // playerTwo.style.marginLeft = "10px";
     // }
 
     let status = thePlayer.status;
@@ -200,19 +198,18 @@ const Board = () => {
       toast.warn("Oh, a snake!", {
         position: toast.POSITION.TOP_CENTER,
         theme: "colored",
-        autoClose: 2000,
+        autoClose: 1800,
       });
 
-       setTimeout(() => {
+      setTimeout(() => {
         handleSnakeOrLadderTile();
-       }, 2000);
+      }, 1800);
     }
 
     // Ladder Check
     const ladderFound = checkLadder(status + rand);
-  
+
     if (ladderFound !== undefined) {
-    
       setDisable(true);
       setTileType({
         name: ladderFound,
@@ -222,16 +219,17 @@ const Board = () => {
       toast.warn("You are stepping on a Ladder!", {
         position: toast.POSITION.TOP_CENTER,
         theme: "colored",
-        autoClose: 2000,
+        autoClose: 1800,
       });
-        
+
+      setTimeout(() => {
         handleSnakeOrLadderTile();
+      }, 1000);
     }
 
-
     thePlayer.status += rand;
-    const gameDataCopy = {...gameData, diceNumber: rand, player: thePlayer}
-    setGameData(gameDataCopy)
+    const gameDataCopy = { ...gameData, diceNumber: rand, player: thePlayer };
+    setGameData(gameDataCopy);
   };
 
   const handleAnswerSubmit = (selectedChoice) => {
@@ -267,7 +265,7 @@ const Board = () => {
             theme: "colored",
             autoClose: 3000,
           });
-       
+
           player.status = tileType.name.to;
 
           setGameData((state) => {
@@ -276,7 +274,6 @@ const Board = () => {
               player: player,
             };
           });
-
         } else {
           toast.error("Bullocks!, Thats wrong", {
             position: toast.POSITION.TOP_RIGHT,
@@ -297,31 +294,32 @@ const Board = () => {
     }
     // Hide the popup
     toggle();
-    setDisable(false)
+    setDisable(false);
   };
 
   return (
     <>
-      <Modal isOpen={modal}>
-        <ModalHeader>
-          <h3>{question}</h3>
+      <Modal isOpen={modal} centered size="lg">
+        <ModalHeader style={{ justifyContent: "center" }}>
+          <h2>{question}</h2>
         </ModalHeader>
-        <ModalBody>
-          <ul className="listed-elements">
+        <ModalBody style={{ display: "flex", justifyContent: "center" }}>
+          <ul className="listed-elements" font-size="20px">
             {choices.map((choice) => (
               <li key={choice}>
-                <button onClick={() => handleAnswerSubmit(choice)}>
+                <button 
+                onClick={() => handleAnswerSubmit(choice)}>
                   {choice}
                 </button>
               </li>
             ))}
           </ul>
         </ModalBody>
-        <ModalFooter>
+        {/* <ModalFooter>
           <Button color="primary" onClick={toggle}>
-           Continue
+            Submit
           </Button>{" "}
-        </ModalFooter>
+        </ModalFooter> */}
       </Modal>
       <div className="boardGame">
         <div className="dice">
@@ -332,13 +330,20 @@ const Board = () => {
         <div>
           <div className="table">{boardHtml}</div>
         </div>
-        <div className="dice" style={{ cursor: disable ? 'not-allowed': 'default'}}>
-          <Button variant="primary" onClick={onRollDiceClick} disabled={disable}>
+        <div
+          className="dice"
+          style={{ cursor: disable ? "not-allowed" : "default" }}
+        >
+          <Button
+            variant="primary"
+            onClick={onRollDiceClick}
+            disabled={disable}
+          >
             Roll the dice
           </Button>
           <span style={{ padding: "2rem" }}>
-            {gameData.start 
-                ? ` player1 moved 
+            {gameData.start
+              ? ` player1 moved 
                ${gameData.diceNumber}
                `
               : "Start throwing the Dice"}
