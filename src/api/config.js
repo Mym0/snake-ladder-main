@@ -1,11 +1,17 @@
-import axios from "axios";
-const token = 'eyJraWQiOiJTY0VRV3NzVWpoODVuaGUweGR4X1c3ZWJmb2NxY0tfNU5YNjlYWW9rNGE4IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULmM2RHRxOXZMMWk4cF9SMlo0WG81ekJ2WmJIempXRHZFbTVkQnAwQ0NRRHMiLCJpc3MiOiJodHRwczovL2lkLm9jdG9sZWFybi5kZS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2ODEyMzQ1NDksImV4cCI6MTY4MTIzODE0OSwiY2lkIjoiMG9hOGJzN2g0MTlYbDByY1k1ZDciLCJ1aWQiOiIwMHU3MGxnMDFramFTMnY4eTVkNyIsInNjcCI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNjgxMjM0NTQ3LCJzdWIiOiJtZWxnZW5keTQwQHlhaG9vLmNvbSJ9.UwoOg8f-KgFRsuuzmMv0yJ5BIxN8xbMXrozXpWd0Ph20Z9spbtK_O5uGUx55m1hT01MARxv6-jrtEwE2E9v7gDn19X9lKk2_JGg1pHa4JTwA3S0ax0KNmRZz1JDTL_Pt_cGM8LhVoJdDsUx66SpxjEiBWEVuu8nlgJInVC1DPFiCXZhObIbXwwAGadRjMaEg7W-ZXUdaC6neKjjco251Eij1_B6EnNpydS1KsdCmML9NIyyVUMejwqV4fIZ3xvHYahoz2cJytXVK49_3lLEW0YL2iQhfFKTH1mEROYkrsSsTCbXTp6VQPQIjQm4HzPVVqovNJCcUTkh3nSnN3fw9MQ'
-export default axios.create({
-    baseURL:'http://localhost:3000',
-    headers: {
-        'Authorization': 'Bearer '+token,
-        'apiKey': 'xxxx-aaaa-ccc-bbb-uuu',
-        'apiSecret': 'dddd-iii-qqqq-aaaa-xde'
-    }
+import axios from 'axios';
+const token =
+  'eyJraWQiOiJTY0VRV3NzVWpoODVuaGUweGR4X1c3ZWJmb2NxY0tfNU5YNjlYWW9rNGE4IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkh1cF95VGY5V3FZVnc5WGxMMVJGcXg0aTlvT0YyQnRTdnRJaWlzekRDS0kiLCJpc3MiOiJodHRwczovL2lkLm9jdG9sZWFybi5kZS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2ODE1OTU3MDksImV4cCI6MTY4MTU5OTMwOSwiY2lkIjoiMG9hOGJzN2g0MTlYbDByY1k1ZDciLCJ1aWQiOiIwMHU3MGxnMDFramFTMnY4eTVkNyIsInNjcCI6WyJlbWFpbCIsIm9wZW5pZCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNjgxMjM0NTQ3LCJzdWIiOiJtZWxnZW5keTQwQHlhaG9vLmNvbSJ9.DnmQy0W6zC3qRU6GICybIRqqKZU5ezibmVo5L3OCUTMl4UDW2mLKqTRZ9GXgePyarpicON_pMKtGAjukUf9f7LngxXnO0UpGSyftkiuoME942IJdXlGy8kZWsVU03rHymzkiRPGO28iUHv9WQew6ESLeCSJsSH4tUpl6y05ubT7uglYM4oMhXr7EDsKpJGixbacQBew6J57Z_uDhuX5GVBDaeTpCRUcnfzMmyu4qLTd-Zxhb-0hRZQnZjY0akHgUYKrC3Z8zzmrOpb_4X6wVrk4EkH3Zdf0SaRnGacGoCX8Mkq7UNlHR6TK7OoQL571LlL0iJrqEA-oMzioOtaXBww';
+const baseUrl = 'https://app.octolearn.de/api/third-party/';
+const apiKey = 'xxxx-aaaa-ccc-bbb-uuu';
+const apiSecret = 'dddd-iii-qqqq-aaaa-xde';
+
+const axoisInstance = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    Authorization: `Bearer ${token}`,
+    apiKey,
+    apiSecret,
+  },
 });
 
+export default axoisInstance;
