@@ -4,6 +4,7 @@ const getNewQuestionApi = async (numberOfNeededQuestions) => {
   const url = 'next-relevant-questions';
   const params = {
     numberOfNeededQuestions: numberOfNeededQuestions,
+    // filterQueryFormat:filterQueryFormat,
   };
 
   try {

@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { player } from '../../utils/util';
+import Mockdata from '../.././Mock/Newquestion.json';
+
 toast.configure();
 
 const Board = () => {
@@ -115,9 +117,16 @@ const Board = () => {
 
   const handleSnakeOrLadderTile = () => {
     // Generate a random question and choices
-    const question = 'What is the capital of France?';
-    const choices = ['Paris', 'London', 'Berlin', 'Madrid'];
-    const answer = 'Paris';
+
+    const rand = Math.floor(Math.random() * 3);
+    const randomQuestions = Math.floor(Math.random() * (Mockdata.length - 1));
+
+    const question = Mockdata[randomQuestions].question;
+    const answer = Mockdata[randomQuestions].answer;
+    const choices = Mockdata[randomQuestions].wrongAnswers;
+    choices.splice(rand, 0, answer);
+
+    console.log(choices);
 
     // Set the question, choices, and answer in state
     setQuestion(question);
@@ -138,7 +147,7 @@ const Board = () => {
     const min = 1;
     const max = 7;
     // const rand = Math.floor(min + Math.random() * (max - min));
-    const rand = 5;
+    const rand = 1;
     let thePlayer = { ...gameData.player };
 
     if (thePlayer.status > 94) {
