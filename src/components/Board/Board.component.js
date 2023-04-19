@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { player } from '../../utils/util';
 import Mockdata from '../.././Mock/Newquestion.json';
+import startCanvas from "../../canvas";
 
 toast.configure();
 
@@ -31,6 +32,14 @@ const Board = () => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+
+  useEffect(() => {
+    if (gameData.gameover) {
+      startCanvas()
+    }
+  }, [gameData.gameover])
+
 
   // Resetting the Game
   const resetBtn = useCallback(() => {
