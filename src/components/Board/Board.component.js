@@ -98,7 +98,6 @@ const Board = () => {
         backgroundColor: 'grey',
       };
 
-      // Todo - Put images
       boardHtml.push(
         <Cell
           sStyle={found}
@@ -134,8 +133,6 @@ const Board = () => {
     const choices = Mockdata[randomQuestions].wrongAnswers;
     choices.splice(rand, 0, answer);
 
-    // console.log(choices);
-
     // Set the question, choices, and answer in state
     setQuestion(question);
     setChoices(choices);
@@ -146,8 +143,8 @@ const Board = () => {
   };
 
   const onRollDiceClick = () => {
-    console.log("Is game Over ?", gameData.gameover);
-    console.log("Canvas", startCanvas);
+    // console.log('Is game Over ?', gameData.gameover);
+    // console.log('Canvas', startCanvas);
     setGameData((state) => {
       return {
         ...state,
@@ -311,6 +308,7 @@ const Board = () => {
       default:
         break;
     }
+
     // Hide the popup
     toggle();
     setDisable(false);
@@ -318,6 +316,17 @@ const Board = () => {
 
   return (
     <>
+      <canvas
+        id="canvas"
+        style={{
+          'z-index': gameData.gameover ? '999' : '-1',
+        }}
+      ></canvas>
+      {gameData.gameover && (
+        <div className="memo-container">
+          <h1 id="memo">winner winner chicken dinner !</h1>
+        </div>
+      )}
       <Modal isOpen={modal} centered size="lg">
         <ModalHeader style={{ justifyContent: 'center' }}>
           <h2>{question}</h2>
@@ -333,11 +342,6 @@ const Board = () => {
             ))}
           </ul>
         </ModalBody>
-        {/* <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Submit
-          </Button>{" "}
-        </ModalFooter> */}
       </Modal>
       <div className="boardGame">
         <div className="dice">
@@ -366,7 +370,7 @@ const Board = () => {
                `
               : 'Start throwing the Dice'}
           </span>
-          <Button onClick={() => resetBtn()}>Reset Game</Button>
+          <Button onClick={() => resetBtn()} style={{'z-index':'1000'}}>Reset Game</Button>
         </div>
       </div>
     </>
@@ -376,4 +380,3 @@ const Board = () => {
 export default Board;
 
 //Need help with the Following
-// Cant implement the Procceeding Condition correclty, either Ladders or Snakes
