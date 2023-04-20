@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Cell from '../Cell/Cell.component';
 import './Board.scss';
 import '../Image/ImageContainer.scss';
-import { getPlayer, getSnakes, getLadder } from '../../utils/util';
+import { getSnakes, getLadder } from '../../utils/util';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { player } from '../../utils/util';
 import Mockdata from '../.././Mock/Newquestion.json';
-import startCanvas from "../../canvas";
+import startCanvas from '../../canvas';
 
 toast.configure();
 
@@ -33,13 +33,12 @@ const Board = () => {
 
   const toggle = () => setModal(!modal);
 
-
+  //Celebrate the win
   useEffect(() => {
     if (gameData.gameover) {
-      startCanvas()
+      startCanvas();
     }
-  }, [gameData.gameover])
-
+  }, [gameData.gameover]);
 
   // Resetting the Game
   const resetBtn = useCallback(() => {
@@ -54,7 +53,7 @@ const Board = () => {
         player: player,
       };
     });
-  }, []);
+  }, [gameData.player]);
 
   // Snake check
   const checkSnake = useCallback(
@@ -135,7 +134,7 @@ const Board = () => {
     const choices = Mockdata[randomQuestions].wrongAnswers;
     choices.splice(rand, 0, answer);
 
-    console.log(choices);
+    // console.log(choices);
 
     // Set the question, choices, and answer in state
     setQuestion(question);
@@ -147,6 +146,8 @@ const Board = () => {
   };
 
   const onRollDiceClick = () => {
+    console.log("Is game Over ?", gameData.gameover);
+    console.log("Canvas", startCanvas);
     setGameData((state) => {
       return {
         ...state,
@@ -155,8 +156,8 @@ const Board = () => {
     });
     const min = 1;
     const max = 7;
-    // const rand = Math.floor(min + Math.random() * (max - min));
-    const rand = 1;
+    const rand = Math.floor(min + Math.random() * (max - min));
+    // const rand = 1;
     let thePlayer = { ...gameData.player };
 
     if (thePlayer.status > 94) {

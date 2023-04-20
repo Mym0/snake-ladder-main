@@ -1,5 +1,5 @@
-const CLIENT_ID = env.CLIENT_ID;
-const ISSUER = env.ISSUER;
+const CLIENT_ID = '0oace1jy5cAIRkj625d6';
+const ISSUER = 'https://id.octolearn.de/oauth2/default';
 const OKTA_TESTING_DISABLEHTTPSCHECK =
   process.env.OKTA_TESTING_DISABLEHTTPSCHECK || false;
 const REDIRECT_URI = `${window.location.origin}/login/callback`;
