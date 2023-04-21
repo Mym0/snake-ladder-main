@@ -1,0 +1,5 @@
+Make signing in mandatory for the player to be able to begin the game.
+add more snakes and Ladders.
+get rid of the mocks File and use the Response to get the needed Questions.
+Debug the repeated correct answer when Questions show up.
+add some user information to the UI

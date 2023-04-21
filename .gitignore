@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #Enviroment Variables
-.env
+# .env
 
 #Stationery development
-.ToDos
+# .ToDos
