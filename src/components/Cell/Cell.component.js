@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ImageContainer from '../Image/ImageContainer.component';
 import snake3 from '../../img/snake3.png';
 import snake2 from '../../img/snake2.png';

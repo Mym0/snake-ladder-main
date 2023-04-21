@@ -24,3 +24,6 @@ yarn-error.log*
 
 #Enviroment Variables
 .env
+
+#Stationery development
+.ToDos

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withOktaAuth } from '@okta/okta-react';
 import './App.css';
-import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import Board from './components/Board/Board.component';
 import { useOktaAuth } from '@okta/okta-react';
