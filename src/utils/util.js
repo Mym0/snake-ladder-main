@@ -1,6 +1,12 @@
 export function getSnakes() {
   const snakes = [
     {
+      head: 36,
+      tail: 16,
+      imgClass: 'snake2',
+      divClass: 'imageContainerSnake2',
+    },
+    {
       head: 42,
       tail: 18,
       imgClass: 'snake4',
@@ -19,6 +25,12 @@ export function getSnakes() {
       divClass: 'imageContainerSnake3',
     },
     {
+      head: 30,
+      tail: 13,
+      imgClass: 'snake3',
+      divClass: 'imageContainerSnake3',
+    },
+    {
       head: 96,
       tail: 52,
       imgClass: 'snake5',
@@ -33,6 +45,18 @@ export function getLadder() {
     {
       from: 6,
       to: 34,
+      imgClass: 'ladder1',
+      divClass: 'imageContainerLadder1',
+    },
+    {
+      from: 53,
+      to: 89,
+      imgClass: 'ladder1',
+      divClass: 'imageContainerLadder1',
+    },
+    {
+      from: 61,
+      to: 99,
       imgClass: 'ladder1',
       divClass: 'imageContainerLadder1',
     },

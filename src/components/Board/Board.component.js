@@ -9,17 +9,18 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { player } from '../../utils/util';
 import Mockdata from '../.././Mock/Newquestion.json';
 import startCanvas from '../../canvas';
+import getNewQuestionApi from '../../api/getNewQuestion';
+import Avatar from '../../img/hacker.png';
+import { useOktaAuth } from '@okta/okta-react';
 
 toast.configure();
 
-const Board = () => {
+const Board = ({ userInfo }) => {
   const [gameData, setGameData] = useState({
-    diceNumber: 1,
     player: player,
     snakes: getSnakes(),
     ladders: getLadder(),
     gameover: false,
-    start: false,
   });
 
   const [boardHtml, setBoardHtml] = useState([]);
@@ -28,10 +29,16 @@ const Board = () => {
   const [answer, setAnswer] = useState('');
   const [tileType, setTileType] = useState('');
   const [disable, setDisable] = useState(false);
+  const [diceValue, setDiceValue] = useState('');
+  const [gameStart, setGameStart] = useState(false);
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  useEffect(() => {
+    getNewQuestionApi();
+  }, []);
 
   //Celebrate the win
   useEffect(() => {
@@ -45,10 +52,11 @@ const Board = () => {
     let player = gameData.player;
     player.status = 1;
 
+    setGameStart(true);
+    setDiceValue('');
     setGameData((state) => {
       return {
         ...state,
-        start: true,
         gameover: false,
         player: player,
       };
@@ -143,17 +151,12 @@ const Board = () => {
   };
 
   const onRollDiceClick = () => {
-    // console.log('Is game Over ?', gameData.gameover);
-    // console.log('Canvas', startCanvas);
-    setGameData((state) => {
-      return {
-        ...state,
-        start: true,
-      };
-    });
+    setGameStart(true);
+
     const min = 1;
     const max = 7;
     const rand = Math.floor(min + Math.random() * (max - min));
+    setDiceValue(rand);
     // const rand = 1;
     let thePlayer = { ...gameData.player };
 
@@ -314,6 +317,10 @@ const Board = () => {
     setDisable(false);
   };
 
+  const { oktaAuth } = useOktaAuth();
+
+  const logout = async () => oktaAuth.signOut();
+
   return (
     <>
       <canvas
@@ -345,9 +352,23 @@ const Board = () => {
       </Modal>
       <div className="boardGame">
         <div className="dice">
-          <span style={{ padding: '2rem' }}>
-            {gameData.player?.name + "'s Trun"}
-          </span>
+          {userInfo ? (
+            <div>
+              <img
+                className="mb-3"
+                alt="avatar"
+                src={Avatar}
+                width={50}
+                height={50}
+              />
+              <p>{userInfo?.given_name + ' ' + userInfo?.family_name}</p>
+              <Button id="logout-button" onClick={logout}>
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <p>loading user info...</p>
+          )}
         </div>
         <div>
           <div className="table">{boardHtml}</div>
@@ -364,13 +385,15 @@ const Board = () => {
             Roll the dice
           </Button>
           <span style={{ padding: '2rem' }}>
-            {gameData.start
-              ? ` player1 moved 
-               ${gameData.diceNumber}
+            {gameStart
+              ? ` ${userInfo?.given_name} moved
+              ${diceValue}
                `
               : 'Start throwing the Dice'}
           </span>
-          <Button onClick={() => resetBtn()} style={{'z-index':'1000'}}>Reset Game</Button>
+          <Button onClick={() => resetBtn()} style={{ 'z-index': '1000' }}>
+            Reset Game
+          </Button>
         </div>
       </div>
     </>
