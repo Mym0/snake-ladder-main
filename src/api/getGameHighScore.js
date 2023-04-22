@@ -1,10 +1,10 @@
-import axoisInstance from './config';
+import axiosInstance from './config';
 
 const getGameHighScoreApi = async () => {
   const url = 'learning-content-folders';
 
   try {
-    const response = await axoisInstance.get(url);
+    const response = await axiosInstance().get(url);
     return response;
   } catch (err) {
     console.log(err);

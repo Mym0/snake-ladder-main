@@ -1,4 +1,4 @@
-import axoisInstance from './config';
+import axiosInstance from './config';
 
 const saveGameHighScoreApi = async (body) => {
   const url = 'record';
@@ -8,7 +8,7 @@ const saveGameHighScoreApi = async (body) => {
   };
 
   try {
-    const response = await axoisInstance.post(url, bodyExample);
+    const response = await axiosInstance().post(url, bodyExample);
     return response;
   } catch (err) {
     console.log(err);

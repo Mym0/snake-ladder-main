@@ -1,4 +1,4 @@
-import axoisInstance from './config';
+import axiosInstance from './config';
 
 const replyToQuestionApi = async (body) => {
   const url = '';
@@ -18,7 +18,7 @@ const replyToQuestionApi = async (body) => {
   };
 
   try {
-    const response = await axoisInstance.put(url, bodyExample);
+    const response = await axiosInstance().put(url, bodyExample);
     return response;
   } catch (err) {
     console.log(err);

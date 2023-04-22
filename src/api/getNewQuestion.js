@@ -1,4 +1,4 @@
-import axoisInstance from './config';
+import axiosInstance from './config';
 
 const getNewQuestionApi = async (numberOfNeededQuestions) => {
   const url = 'next-relevant-questions';
@@ -8,7 +8,7 @@ const getNewQuestionApi = async (numberOfNeededQuestions) => {
   };
 
   try {
-    const response = await axoisInstance.get(url, {
+    const response = await axiosInstance().get(url, {
       params: params,
     });
     return response;
